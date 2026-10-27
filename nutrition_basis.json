@@ -1,0 +1,942 @@
+{
+  "version": "1.2",
+  "date": "2026-10-27",
+  "units": "per 100 g of ingredient as weighed before cooking; kcal, g protein, g fat, g carbohydrates",
+  "method": "Sum grams / 100 * declared per-100-g values, then divide by portions. All listed oil, sauces and coating included. Calories and macros are separately declared; differences from 4/9/4 are possible due to rounding/fibre/factors. Most inputs are approximate editorial assumptions, NOT verified labels of user products. Edition 1.2 adds independent child portions. Adult and child totals are calculated separately; no average family portion. Milk volume in ml uses an approximate 1 ml = 1 g conversion for nutrition only. Oil density is assumed 0.92 g/ml. Pork-beef mince is explicitly modelled at 200 kcal/100 g, not a claim about any brand.",
+  "ingredients": [
+    {
+      "key": "iceberg",
+      "example_label": "Айсберг",
+      "per_100g": {
+        "kcal": 14,
+        "protein": 0.9,
+        "fat": 0.1,
+        "carbs": 3
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "eggplant",
+      "example_label": "Баклажаны",
+      "per_100g": {
+        "kcal": 25,
+        "protein": 1,
+        "fat": 0.2,
+        "carbs": 5.9
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "banana",
+      "example_label": "Банан очищенный",
+      "per_100g": {
+        "kcal": 89,
+        "protein": 1.1,
+        "fat": 0.3,
+        "carbs": 22.8
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "pepper_veg",
+      "example_label": "Болгарский перец",
+      "per_100g": {
+        "kcal": 27,
+        "protein": 1,
+        "fat": 0.2,
+        "carbs": 5.3
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "broccoli",
+      "example_label": "Брокколи",
+      "per_100g": {
+        "kcal": 34,
+        "protein": 2.8,
+        "fat": 0.4,
+        "carbs": 6.6
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "bun",
+      "example_label": "Булочки для бургера, 2 × 50 г",
+      "per_100g": {
+        "kcal": 280,
+        "protein": 8,
+        "fat": 5,
+        "carbs": 50.8
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "water",
+      "example_label": "Вода",
+      "per_100g": {
+        "kcal": 0,
+        "protein": 0,
+        "fat": 0,
+        "carbs": 0
+      },
+      "provenance": "Нулевой энергетический вклад",
+      "source_url": null
+    },
+    {
+      "key": "gouda",
+      "example_label": "Гауда",
+      "per_100g": {
+        "kcal": 356,
+        "protein": 25,
+        "fat": 27.4,
+        "carbs": 2.2
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "beef10",
+      "example_label": "Говяжий фарш 10% жирности",
+      "per_100g": {
+        "kcal": 176,
+        "protein": 20,
+        "fat": 10,
+        "carbs": 0
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "yogurt",
+      "example_label": "Густой безлактозный йогурт 2%, без сахара",
+      "per_100g": {
+        "kcal": 70,
+        "protein": 8,
+        "fat": 2,
+        "carbs": 5
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "mustard",
+      "example_label": "Дижонская горчица",
+      "per_100g": {
+        "kcal": 150,
+        "protein": 7,
+        "fat": 10,
+        "carbs": 8
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "ginger",
+      "example_label": "Имбирь свежий",
+      "per_100g": {
+        "kcal": 80,
+        "protein": 1.8,
+        "fat": 0.8,
+        "carbs": 17.8
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "zucchini",
+      "example_label": "Кабачки",
+      "per_100g": {
+        "kcal": 17,
+        "protein": 1.2,
+        "fat": 0.3,
+        "carbs": 3.1
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "cocoa",
+      "example_label": "Какао без сахара",
+      "per_100g": {
+        "kcal": 300,
+        "protein": 23,
+        "fat": 11,
+        "carbs": 20
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "cabbage",
+      "example_label": "Капуста пекинская",
+      "per_100g": {
+        "kcal": 16,
+        "protein": 1.2,
+        "fat": 0.2,
+        "carbs": 3.2
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "potato",
+      "example_label": "Картофель сырой, очищенный",
+      "per_100g": {
+        "kcal": 77,
+        "protein": 2,
+        "fat": 0.1,
+        "carbs": 17
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "ketchup",
+      "example_label": "Кетчуп",
+      "per_100g": {
+        "kcal": 100,
+        "protein": 1,
+        "fat": 0,
+        "carbs": 24
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "parsley",
+      "example_label": "Кинза или петрушка",
+      "per_100g": {
+        "kcal": 36,
+        "protein": 3,
+        "fat": 0.8,
+        "carbs": 6.3
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "coriander",
+      "example_label": "Кориандр молотый",
+      "per_100g": {
+        "kcal": 298,
+        "protein": 12.4,
+        "fat": 17.8,
+        "carbs": 55
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "starch",
+      "example_label": "Кукурузный крахмал",
+      "per_100g": {
+        "kcal": 350,
+        "protein": 0.3,
+        "fat": 0.1,
+        "carbs": 86
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "cumin",
+      "example_label": "Кумин молотый",
+      "per_100g": {
+        "kcal": 375,
+        "protein": 17.8,
+        "fat": 22.3,
+        "carbs": 44.2
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "sesame",
+      "example_label": "Кунжут",
+      "per_100g": {
+        "kcal": 573,
+        "protein": 17.7,
+        "fat": 49.7,
+        "carbs": 23.4
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "lavash",
+      "example_label": "Лаваш тонкий, 4 × 75 г",
+      "per_100g": {
+        "kcal": 275,
+        "protein": 8.5,
+        "fat": 1,
+        "carbs": 58
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "noodles",
+      "example_label": "Лапша пшеничная, сухая",
+      "per_100g": {
+        "kcal": 350,
+        "protein": 11,
+        "fat": 2,
+        "carbs": 72
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "lemon",
+      "example_label": "Лимонный сок",
+      "per_100g": {
+        "kcal": 22,
+        "protein": 0.4,
+        "fat": 0.2,
+        "carbs": 6.9
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "onion",
+      "example_label": "Лук",
+      "per_100g": {
+        "kcal": 40,
+        "protein": 1.1,
+        "fat": 0.1,
+        "carbs": 9.3
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "mayo",
+      "example_label": "Майонез 67%",
+      "per_100g": {
+        "kcal": 620,
+        "protein": 1,
+        "fat": 67,
+        "carbs": 3
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "pasta",
+      "example_label": "Макароны из твёрдой пшеницы, сухие",
+      "per_100g": {
+        "kcal": 350,
+        "protein": 12,
+        "fat": 1.5,
+        "carbs": 72
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "milk",
+      "example_label": "Молоко без лактозы 1,5%",
+      "per_100g": {
+        "kcal": 45,
+        "protein": 3.2,
+        "fat": 1.5,
+        "carbs": 4.7
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "carrot",
+      "example_label": "Морковь",
+      "per_100g": {
+        "kcal": 41,
+        "protein": 0.9,
+        "fat": 0.2,
+        "carbs": 9.6
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "mozzarella",
+      "example_label": "Моцарелла для запекания без лактозы",
+      "per_100g": {
+        "kcal": 280,
+        "protein": 25,
+        "fat": 19,
+        "carbs": 2.2
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "flour",
+      "example_label": "Мука пшеничная",
+      "per_100g": {
+        "kcal": 364,
+        "protein": 10.3,
+        "fat": 1,
+        "carbs": 76.3
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "hotsauce",
+      "example_label": "Мягкий острый соус, без сахара",
+      "per_100g": {
+        "kcal": 20,
+        "protein": 0.5,
+        "fat": 0.3,
+        "carbs": 3
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "honey",
+      "example_label": "Мёд",
+      "per_100g": {
+        "kcal": 304,
+        "protein": 0.3,
+        "fat": 0,
+        "carbs": 82.4
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "oats",
+      "example_label": "Овсяные хлопья долгой варки",
+      "per_100g": {
+        "kcal": 370,
+        "protein": 13,
+        "fat": 7,
+        "carbs": 62
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "pickle",
+      "example_label": "Огурцы маринованные",
+      "per_100g": {
+        "kcal": 15,
+        "protein": 0.5,
+        "fat": 0.2,
+        "carbs": 2
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "cucumber",
+      "example_label": "Огурцы свежие",
+      "per_100g": {
+        "kcal": 15,
+        "protein": 0.7,
+        "fat": 0.1,
+        "carbs": 3.6
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "paprika",
+      "example_label": "Паприка копчёная",
+      "per_100g": {
+        "kcal": 282,
+        "protein": 14,
+        "fat": 13,
+        "carbs": 54
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "parmesan",
+      "example_label": "Пармезан",
+      "per_100g": {
+        "kcal": 392,
+        "protein": 35.8,
+        "fat": 25.8,
+        "carbs": 3.2
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "beef5",
+      "example_label": "Постная говядина для быстрой жарки, около 5% жира",
+      "per_100g": {
+        "kcal": 137,
+        "protein": 21.5,
+        "fat": 5,
+        "carbs": 0
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "tortilla",
+      "example_label": "Пшеничная тортилья, 2 × 50 г",
+      "per_100g": {
+        "kcal": 310,
+        "protein": 8,
+        "fat": 8,
+        "carbs": 51.5
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "baking_powder",
+      "example_label": "Разрыхлитель",
+      "per_100g": {
+        "kcal": 100,
+        "protein": 0,
+        "fat": 0,
+        "carbs": 25
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "brine",
+      "example_label": "Рассол огуречный",
+      "per_100g": {
+        "kcal": 5,
+        "protein": 0,
+        "fat": 0,
+        "carbs": 1
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "oil",
+      "example_label": "Растительное масло",
+      "per_100g": {
+        "kcal": 900,
+        "protein": 0,
+        "fat": 100,
+        "carbs": 0
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "vinegar",
+      "example_label": "Рисовый уксус",
+      "per_100g": {
+        "kcal": 20,
+        "protein": 0,
+        "fat": 0,
+        "carbs": 0.5
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "cream",
+      "example_label": "Сливки без лактозы 10%",
+      "per_100g": {
+        "kcal": 119,
+        "protein": 3,
+        "fat": 10,
+        "carbs": 4.3
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "butter",
+      "example_label": "Сливочное масло без лактозы",
+      "per_100g": {
+        "kcal": 748,
+        "protein": 0.5,
+        "fat": 82.5,
+        "carbs": 0.8
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "soy",
+      "example_label": "Соевый соус",
+      "per_100g": {
+        "kcal": 60,
+        "protein": 6,
+        "fat": 0,
+        "carbs": 9
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "salt",
+      "example_label": "Соль",
+      "per_100g": {
+        "kcal": 0,
+        "protein": 0,
+        "fat": 0,
+        "carbs": 0
+      },
+      "provenance": "Нулевой энергетический вклад",
+      "source_url": null
+    },
+    {
+      "key": "teriyaki",
+      "example_label": "Соус терияки, умеренно сладкий (модель 150 ккал/100 г)",
+      "per_100g": {
+        "kcal": 150,
+        "protein": 3,
+        "fat": 0,
+        "carbs": 34
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "breadcrumbs",
+      "example_label": "Сухари панировочные",
+      "per_100g": {
+        "kcal": 395,
+        "protein": 13.4,
+        "fat": 5.3,
+        "carbs": 72
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "drygarlic",
+      "example_label": "Сухой чеснок",
+      "per_100g": {
+        "kcal": 331,
+        "protein": 16.6,
+        "fat": 0.7,
+        "carbs": 72.7
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "tvorog",
+      "example_label": "Творог без лактозы 2%, не творожная масса",
+      "per_100g": {
+        "kcal": 103,
+        "protein": 18,
+        "fat": 2,
+        "carbs": 3.3
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "chocolate",
+      "example_label": "Тёмный шоколад 70%, без молочных ингредиентов",
+      "per_100g": {
+        "kcal": 600,
+        "protein": 8,
+        "fat": 43,
+        "carbs": 43
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "dill",
+      "example_label": "Укроп",
+      "per_100g": {
+        "kcal": 43,
+        "protein": 3.5,
+        "fat": 1.1,
+        "carbs": 7
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "beans",
+      "example_label": "Фасоль красная готовая без жидкости",
+      "per_100g": {
+        "kcal": 100,
+        "protein": 6.5,
+        "fat": 0.5,
+        "carbs": 16
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "chicken",
+      "example_label": "Филе грудки без кожи, сырое",
+      "per_100g": {
+        "kcal": 120,
+        "protein": 21,
+        "fat": 4,
+        "carbs": 0
+      },
+      "provenance": "Пример этикетки производителя",
+      "source_url": "https://petelinka.ru/product/150/"
+    },
+    {
+      "key": "bread",
+      "example_label": "Хлеб цельнозерновой",
+      "per_100g": {
+        "kcal": 250,
+        "protein": 9,
+        "fat": 3.5,
+        "carbs": 44
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "cauliflower",
+      "example_label": "Цветная капуста",
+      "per_100g": {
+        "kcal": 25,
+        "protein": 1.9,
+        "fat": 0.3,
+        "carbs": 5
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "cheddar",
+      "example_label": "Чеддер",
+      "per_100g": {
+        "kcal": 403,
+        "protein": 24.9,
+        "fat": 33.1,
+        "carbs": 1.3
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "garlic",
+      "example_label": "Чеснок свежий",
+      "per_100g": {
+        "kcal": 149,
+        "protein": 6.4,
+        "fat": 0.5,
+        "carbs": 33.1
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "chili",
+      "example_label": "Чили",
+      "per_100g": {
+        "kcal": 282,
+        "protein": 12,
+        "fat": 14,
+        "carbs": 50
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "blackpepper",
+      "example_label": "Чёрный перец",
+      "per_100g": {
+        "kcal": 251,
+        "protein": 10.4,
+        "fat": 3.3,
+        "carbs": 64
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "mushroom",
+      "example_label": "Шампиньоны",
+      "per_100g": {
+        "kcal": 22,
+        "protein": 3.1,
+        "fat": 0.3,
+        "carbs": 3.3
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "spinach",
+      "example_label": "Шпинат свежий",
+      "per_100g": {
+        "kcal": 23,
+        "protein": 2.9,
+        "fat": 0.4,
+        "carbs": 3.6
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "egg",
+      "example_label": "Яйца без скорлупы",
+      "per_100g": {
+        "kcal": 143,
+        "protein": 12.6,
+        "fat": 9.5,
+        "carbs": 0.7
+      },
+      "provenance": "Приближённое допущение модели",
+      "source_url": null
+    },
+    {
+      "key": "pork_beef",
+      "example_label": "Фарш свиноговяжий нежирный — модель 200 ккал/100 г",
+      "per_100g": {
+        "kcal": 200,
+        "protein": 20,
+        "fat": 13,
+        "carbs": 0
+      },
+      "provenance": "Приближённое допущение редакции 1.2; не этикетка конкретной покупки",
+      "source_url": null
+    },
+    {
+      "key": "milk_regular",
+      "example_label": "Молоко коровье обычное 3,2%",
+      "per_100g": {
+        "kcal": 60,
+        "protein": 3,
+        "fat": 3.2,
+        "carbs": 4.7
+      },
+      "provenance": "Приближённое допущение редакции 1.2; не этикетка конкретной покупки",
+      "source_url": null
+    },
+    {
+      "key": "sugar",
+      "example_label": "Сахар",
+      "per_100g": {
+        "kcal": 400,
+        "protein": 0,
+        "fat": 0,
+        "carbs": 100
+      },
+      "provenance": "Приближённое допущение редакции 1.2; не этикетка конкретной покупки",
+      "source_url": null
+    },
+    {
+      "key": "apple",
+      "example_label": "Яблоко очищенное",
+      "per_100g": {
+        "kcal": 52,
+        "protein": 0.3,
+        "fat": 0.2,
+        "carbs": 13.8
+      },
+      "provenance": "Приближённое допущение редакции 1.2; не этикетка конкретной покупки",
+      "source_url": null
+    },
+    {
+      "key": "pear",
+      "example_label": "Груша очищенная",
+      "per_100g": {
+        "kcal": 57,
+        "protein": 0.4,
+        "fat": 0.1,
+        "carbs": 15.2
+      },
+      "provenance": "Приближённое допущение редакции 1.2; не этикетка конкретной покупки",
+      "source_url": null
+    },
+    {
+      "key": "berries",
+      "example_label": "Ягоды — усреднённый ориентир",
+      "per_100g": {
+        "kcal": 45,
+        "protein": 0.7,
+        "fat": 0.3,
+        "carbs": 10
+      },
+      "provenance": "Приближённое допущение редакции 1.2; не этикетка конкретной покупки",
+      "source_url": null
+    },
+    {
+      "key": "oat_drink",
+      "example_label": "Овсяный напиток без добавленного сахара (не сливки)",
+      "per_100g": {
+        "kcal": 45,
+        "protein": 1,
+        "fat": 1.5,
+        "carbs": 7
+      },
+      "provenance": "Приближённое допущение редакции 1.2; не этикетка конкретной покупки",
+      "source_url": null
+    },
+    {
+      "key": "turkey",
+      "example_label": "Фарш из филе индейки без кожи",
+      "per_100g": {
+        "kcal": 115,
+        "protein": 22,
+        "fat": 3,
+        "carbs": 0
+      },
+      "provenance": "Приближённое допущение редакции 1.2; не этикетка конкретной покупки",
+      "source_url": null
+    }
+  ],
+  "sources": [
+    {
+      "id": "temp",
+      "title": "FoodSafety.gov — Safe Minimum Internal Temperatures",
+      "url": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures",
+      "purpose": "Температуры готовности птицы, фарша, яиц и повторного прогрева."
+    },
+    {
+      "id": "leftovers",
+      "title": "USDA FSIS — Leftovers and Food Safety",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/leftovers-and-food-safety",
+      "purpose": "Охлаждение, хранение готовой еды в холодильнике 3–4 дня при соблюдении условий, разогрев."
+    },
+    {
+      "id": "safe",
+      "title": "USDA FSIS — Steps to Keep Food Safe",
+      "url": "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/steps-keep-food-safe",
+      "purpose": "Раздельное обращение с сырыми продуктами, правило двух часов, неглубокие контейнеры."
+    },
+    {
+      "id": "lactose",
+      "title": "NIDDK — Eating, Diet, & Nutrition for Lactose Intolerance",
+      "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/lactose-intolerance/eating-diet-nutrition",
+      "purpose": "Индивидуальная переносимость лактозы, безлактозные продукты, твёрдые сыры."
+    },
+    {
+      "id": "protein",
+      "title": "ISSN — Position Stand: Protein and Exercise (2017)",
+      "url": "https://link.springer.com/article/10.1186/s12970-017-0174-y",
+      "purpose": "Силовые тренировки, белок и сохранение мышечной массы; не персональное назначение калорий."
+    },
+    {
+      "id": "chicken",
+      "title": "Петелинка — филе грудки, карточка производителя",
+      "url": "https://petelinka.ru/product/150/",
+      "purpose": "Пример этикетки для модели: на 100 г 120 ккал, белки 21 г, жиры 4 г. Это не требование покупать этот бренд."
+    },
+    {
+      "title": "FoodSafety.gov — Safe minimum internal temperatures",
+      "url": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures"
+    },
+    {
+      "title": "NHS — Milk ladder: individual clinician-led reintroduction",
+      "url": "https://www.blmkhealthiertogether.nhs.uk/professionals/gp-primary-care-staff/protein-allergy-information/milk-ladder-has-my-baby-grown-out-cows-milk-protein-allergy"
+    }
+  ]
+}

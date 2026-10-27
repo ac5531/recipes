@@ -1,0 +1,35 @@
+/* Дополнение к исходному оформлению: два режима завтрака, без сетевых ресурсов. */
+[hidden]{display:none!important}
+.family-panel{border:1px solid #bdcdb6;border-radius:14px;padding:20px 22px;margin:3px 0 22px;background:#f4f7ee}
+.family-toggle-line{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.family-toggle-line label{display:flex;align-items:center;gap:11px;font-size:18px;font-weight:750;color:var(--green);cursor:pointer}
+.family-toggle-line input{width:21px;height:21px;accent-color:var(--green);flex:none;cursor:pointer}
+.family-age{font-size:12px;font-weight:700;border:1px solid #d0dac7;padding:3px 9px;border-radius:20px;white-space:nowrap;color:var(--green)}
+.family-intro{font-size:14px;color:var(--muted);margin:10px 0 15px;line-height:1.5}
+.family-portions{display:flex;align-items:flex-end;flex-wrap:wrap;gap:18px}
+.portion-control>label{display:block;font-size:13px;font-weight:700;margin-bottom:5px;color:var(--green)}
+.portion-row{display:flex;align-items:center;gap:6px}
+.portion-row button{width:36px;height:38px;border:1px solid #c6d5bd;border-radius:8px;background:#fff;color:var(--green);font-size:22px;cursor:pointer}
+.portion-row button:hover{background:#e5eddf}.portion-row button:disabled{opacity:.4;cursor:default}
+.portion-row input{width:80px;height:38px;border:1px solid #c6d5bd;border-radius:8px;background:#fff;color:var(--ink);font:600 16px system-ui,sans-serif;text-align:center;padding:4px}
+.portion-hint{font-size:12px;color:var(--muted);margin-bottom:9px}
+.family-panel :focus-visible{outline:3px solid #b77c37;outline-offset:3px}
+.mode-status{font-size:13px;font-weight:650;color:var(--green);margin:15px 0 0}
+#child-mode-info{border-top:1px solid #dbe4d3;padding-top:12px;margin-top:12px}
+.child-title{font:700 21px/1.3 Georgia,serif;color:#244a36;margin:0 0 7px}
+.child-description{font-size:13px;line-height:1.5;margin:5px 0;color:var(--muted)}
+.allergy-notice{border-left:4px solid var(--gold);background:#fff4e3;padding:12px 15px;border-radius:0 8px 8px 0;font-size:14px;margin-top:12px}
+.role-heading{font-size:18px;font-weight:750;color:var(--green);margin:23px 0 10px}
+.role-heading:first-child{margin-top:4px}
+.role-subtitle{font-weight:400;color:var(--muted);font-size:13px;display:block;margin-top:2px}
+.child-ingredients .card{border-color:#c9d9bc;background:#fcfdf9}
+.shared-ingredients{margin-bottom:15px}.shared-ingredients .card{background:#f1f6ec;border-color:#bdcdb6}
+.family-totals ul{list-style:none;padding:0;margin:10px 0 0;columns:2;column-gap:28px}
+.family-totals li{display:flex;justify-content:space-between;gap:10px;break-inside:avoid;border-bottom:1px dashed var(--line);font-size:13px;padding:6px 0}
+.family-totals .sum-amount{font-weight:650;white-space:nowrap}
+.nutrition .child-col{background:#f7f9f2}
+#method-heading{scroll-margin-top:15px}
+.child-storage{border-top:1px solid var(--line);margin-top:15px;padding-top:8px}
+.child-preview{display:block;margin-top:6px;font-size:12px;color:var(--green)}
+@media(max-width:650px){.family-panel{padding:17px 15px}.family-toggle-line label{font-size:16px}.family-age{font-size:11px}.family-portions{gap:13px}.portion-hint{flex-basis:100%;margin:0}.family-totals ul{columns:1}.child-title{font-size:20px}.role-heading{font-size:17px}}
+@media print{.family-panel{padding:10px 13px;margin:0 0 12px;break-inside:avoid}.family-toggle-line,.family-intro{display:none}.mode-status{margin:0}.child-title{font-size:17px}.child-description{font-size:11px}.allergy-notice{font-size:11px;padding:8px}.role-heading{font-size:15px;margin:13px 0 7px}.role-subtitle{font-size:10px}.shared-ingredients{margin-bottom:9px}}

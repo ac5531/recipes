@@ -1,0 +1,562 @@
+[
+  {
+    "id": 1,
+    "file": "01_01_tortilya.html",
+    "title": "Хрустящая тортилья с курицей, яйцом и сыром",
+    "kind": "Завтрак",
+    "portions": 2,
+    "version": "1.2",
+    "time_total_minutes": "30–35",
+    "time_active_minutes": 25,
+    "nutrition": {
+      "kcal": 571.2704999999999,
+      "protein": 48.028000000000006,
+      "fat": 26.151250000000005,
+      "carbs": 36.131499999999996
+    },
+    "nutrition_total": {
+      "kcal": 1142.5409999999997,
+      "protein": 96.05600000000001,
+      "fat": 52.30250000000001,
+      "carbs": 72.26299999999999
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json",
+    "child": {
+      "title": "Конвертик с курицей и мягким сладким перцем",
+      "portions": 1,
+      "nutrition": {
+        "kcal": 232.25,
+        "protein": 18.03,
+        "fat": 8.689999999999998,
+        "carbs": 20.79
+      }
+    }
+  },
+  {
+    "id": 2,
+    "file": "02_02_burger.html",
+    "title": "Завтрак-бургер со свиноговяжьей котлетой, яйцом и сыром",
+    "kind": "Завтрак",
+    "portions": 2,
+    "version": "1.2",
+    "time_total_minutes": "30–35",
+    "time_active_minutes": 25,
+    "nutrition": {
+      "kcal": 599.79,
+      "protein": 40.788,
+      "fat": 33.11700000000001,
+      "carbs": 33.6045
+    },
+    "nutrition_total": {
+      "kcal": 1199.58,
+      "protein": 81.576,
+      "fat": 66.23400000000002,
+      "carbs": 67.209
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json",
+    "child": {
+      "title": "Открытый бутерброд со свиноговяжьей котлеткой",
+      "portions": 1,
+      "nutrition": {
+        "kcal": 262.0,
+        "protein": 17.080000000000002,
+        "fat": 12.889999999999999,
+        "carbs": 19.22
+      }
+    }
+  },
+  {
+    "id": 3,
+    "file": "03_03_frittata.html",
+    "title": "Куриные оладьи с кабачком и сыром",
+    "kind": "Завтрак",
+    "portions": 2,
+    "version": "1.2",
+    "time_total_minutes": "25–35",
+    "time_active_minutes": 20,
+    "nutrition": {
+      "kcal": 483.7,
+      "protein": 46.64,
+      "fat": 19.6,
+      "carbs": 30.59
+    },
+    "nutrition_total": {
+      "kcal": 967.4,
+      "protein": 93.28,
+      "fat": 39.2,
+      "carbs": 61.18
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json",
+    "child": {
+      "title": "Куриные оладьи с мелко натёртым кабачком",
+      "portions": 1,
+      "nutrition": {
+        "kcal": 246.0,
+        "protein": 19.615000000000002,
+        "fat": 7.075,
+        "carbs": 26.055
+      }
+    }
+  },
+  {
+    "id": 4,
+    "file": "04_04_choco_oats.html",
+    "title": "Яблочно-банановая овсяная запеканка с творожным кремом",
+    "kind": "Завтрак",
+    "portions": 2,
+    "version": "1.2",
+    "time_total_minutes": "35–45",
+    "time_active_minutes": 12,
+    "nutrition": {
+      "kcal": 519.15,
+      "protein": 35.735,
+      "fat": 12.295000000000002,
+      "carbs": 68.27000000000001
+    },
+    "nutrition_total": {
+      "kcal": 1038.3,
+      "protein": 71.47,
+      "fat": 24.590000000000003,
+      "carbs": 136.54000000000002
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json",
+    "child": {
+      "title": "Яблочно-банановая овсяная мини-запеканка",
+      "portions": 1,
+      "nutrition": {
+        "kcal": 214.6,
+        "protein": 5.44,
+        "fat": 4.12,
+        "carbs": 40.07
+      }
+    }
+  },
+  {
+    "id": 5,
+    "file": "05_05_blinchiki.html",
+    "title": "Блины на обычном молоке с курицей, грибами и сырным соусом",
+    "kind": "Завтрак",
+    "portions": 2,
+    "version": "1.2",
+    "time_total_minutes": "30–40",
+    "time_active_minutes": 30,
+    "nutrition": {
+      "kcal": 555.025,
+      "protein": 40.892,
+      "fat": 26.524000000000004,
+      "carbs": 38.894999999999996
+    },
+    "nutrition_total": {
+      "kcal": 1110.05,
+      "protein": 81.784,
+      "fat": 53.04800000000001,
+      "carbs": 77.78999999999999
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json",
+    "child": {
+      "title": "Домашние блины на обычном молоке с курицей",
+      "portions": 1,
+      "nutrition": {
+        "kcal": 283.6166666666667,
+        "protein": 20.726666666666667,
+        "fat": 13.441666666666666,
+        "carbs": 19.311666666666667
+      }
+    }
+  },
+  {
+    "id": 6,
+    "file": "06_06_rosti.html",
+    "title": "Картофельный рёшти с яйцом",
+    "kind": "Завтрак",
+    "portions": 2,
+    "version": "1.2",
+    "time_total_minutes": "30–35",
+    "time_active_minutes": 25,
+    "nutrition": {
+      "kcal": 501.295,
+      "protein": 39.15,
+      "fat": 20.9995,
+      "carbs": 38.717
+    },
+    "nutrition_total": {
+      "kcal": 1002.59,
+      "protein": 78.3,
+      "fat": 41.999,
+      "carbs": 77.434
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json",
+    "child": {
+      "title": "Небольшие рёшти с курицей",
+      "portions": 1,
+      "nutrition": {
+        "kcal": 241.39999999999998,
+        "protein": 17.392,
+        "fat": 7.9639999999999995,
+        "carbs": 25.28
+      }
+    }
+  },
+  {
+    "id": 7,
+    "file": "07_07_khachapuri.html",
+    "title": "Ленивый хачапури с сыром и яйцом",
+    "kind": "Завтрак",
+    "portions": 2,
+    "version": "1.2",
+    "time_total_minutes": "25–35",
+    "time_active_minutes": 15,
+    "nutrition": {
+      "kcal": 568.5725,
+      "protein": 50.199,
+      "fat": 22.563750000000002,
+      "carbs": 39.649499999999996
+    },
+    "nutrition_total": {
+      "kcal": 1137.145,
+      "protein": 100.398,
+      "fat": 45.127500000000005,
+      "carbs": 79.29899999999999
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json",
+    "child": {
+      "title": "Котлетки из индейки с хлебом и огурцом",
+      "portions": 1,
+      "nutrition": {
+        "kcal": 231.25,
+        "protein": 20.78,
+        "fat": 7.04,
+        "carbs": 20.84
+      }
+    }
+  },
+  {
+    "id": 8,
+    "file": "08_08_tvorog_oats.html",
+    "title": "Безлактозный творог с овсянкой и бананом",
+    "kind": "Завтрак",
+    "portions": 2,
+    "version": "1.2",
+    "time_total_minutes": "15–20",
+    "time_active_minutes": 10,
+    "nutrition": {
+      "kcal": 502.1,
+      "protein": 48.99000000000001,
+      "fat": 9.120000000000001,
+      "carbs": 57.52
+    },
+    "nutrition_total": {
+      "kcal": 1004.2,
+      "protein": 97.98000000000002,
+      "fat": 18.240000000000002,
+      "carbs": 115.04
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json",
+    "child": {
+      "title": "Овсяная каша с грушей и ягодами",
+      "portions": 1,
+      "nutrition": {
+        "kcal": 245.75,
+        "protein": 6.625,
+        "fat": 5.125,
+        "carbs": 43.7
+      }
+    }
+  },
+  {
+    "id": 9,
+    "file": "09_09_hot_toast.html",
+    "title": "Горячие тосты с курицей, сыром и грибами",
+    "kind": "Завтрак",
+    "portions": 2,
+    "version": "1.2",
+    "time_total_minutes": "25–30",
+    "time_active_minutes": 20,
+    "nutrition": {
+      "kcal": 538.0050000000001,
+      "protein": 45.235,
+      "fat": 20.131500000000003,
+      "carbs": 44.602
+    },
+    "nutrition_total": {
+      "kcal": 1076.0100000000002,
+      "protein": 90.47,
+      "fat": 40.263000000000005,
+      "carbs": 89.204
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json",
+    "child": {
+      "title": "Тёплый тост с нежной куриной намазкой",
+      "portions": 1,
+      "nutrition": {
+        "kcal": 217.0,
+        "protein": 18.580000000000002,
+        "fat": 7.24,
+        "carbs": 19.040000000000003
+      }
+    }
+  },
+  {
+    "id": 10,
+    "file": "10_10_omelet_roll.html",
+    "title": "Омлет-рулет с курицей и сыром",
+    "kind": "Завтрак",
+    "portions": 2,
+    "version": "1.2",
+    "time_total_minutes": "35–40",
+    "time_active_minutes": 20,
+    "nutrition": {
+      "kcal": 506.28000000000003,
+      "protein": 51.144499999999994,
+      "fat": 26.953,
+      "carbs": 14.807
+    },
+    "nutrition_total": {
+      "kcal": 1012.5600000000001,
+      "protein": 102.28899999999999,
+      "fat": 53.906,
+      "carbs": 29.614
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json",
+    "child": {
+      "title": "Мягкие картофельно-куриные лепёшки",
+      "portions": 1,
+      "nutrition": {
+        "kcal": 248.6,
+        "protein": 18.525000000000002,
+        "fat": 6.09,
+        "carbs": 29.885
+      }
+    }
+  },
+  {
+    "id": 11,
+    "file": "11_11_creamy_chicken.html",
+    "title": "Курица в сливочно-грибном соусе с картофельным пюре",
+    "kind": "Ужин",
+    "portions": 4,
+    "version": "1.1",
+    "time_total_minutes": "40–50",
+    "time_active_minutes": 30,
+    "nutrition": {
+      "kcal": 640.14,
+      "protein": 52.58349999999999,
+      "fat": 25.0855,
+      "carbs": 53.549
+    },
+    "nutrition_total": {
+      "kcal": 2560.56,
+      "protein": 210.33399999999995,
+      "fat": 100.342,
+      "carbs": 214.196
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json"
+  },
+  {
+    "id": 12,
+    "file": "12_12_cheeseburger_bowl.html",
+    "title": "Чизбургер-боул со свиноговяжьим фаршем и хрустящим картофелем",
+    "kind": "Ужин",
+    "portions": 4,
+    "version": "1.2",
+    "time_total_minutes": "40–50",
+    "time_active_minutes": 25,
+    "nutrition": {
+      "kcal": 768.8924999999999,
+      "protein": 45.6095,
+      "fat": 40.6615,
+      "carbs": 54.554999999999986
+    },
+    "nutrition_total": {
+      "kcal": 3075.5699999999997,
+      "protein": 182.438,
+      "fat": 162.646,
+      "carbs": 218.21999999999994
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json"
+  },
+  {
+    "id": 13,
+    "file": "13_13_creamy_pasta.html",
+    "title": "Сливочная паста с курицей, чесноком и пармезаном",
+    "kind": "Ужин",
+    "portions": 4,
+    "version": "1.1",
+    "time_total_minutes": "30–40",
+    "time_active_minutes": 25,
+    "nutrition": {
+      "kcal": 720.27,
+      "protein": 58.472,
+      "fat": 24.802500000000002,
+      "carbs": 66.50649999999999
+    },
+    "nutrition_total": {
+      "kcal": 2881.08,
+      "protein": 233.888,
+      "fat": 99.21000000000001,
+      "carbs": 266.02599999999995
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json"
+  },
+  {
+    "id": 14,
+    "file": "14_14_quesadilla.html",
+    "title": "Мексиканская кесадилья с курицей и сыром",
+    "kind": "Ужин",
+    "portions": 4,
+    "version": "1.1",
+    "time_total_minutes": "35–45",
+    "time_active_minutes": 30,
+    "nutrition": {
+      "kcal": 670.5775000000001,
+      "protein": 56.758499999999984,
+      "fat": 26.052249999999997,
+      "carbs": 52.50899999999999
+    },
+    "nutrition_total": {
+      "kcal": 2682.3100000000004,
+      "protein": 227.03399999999993,
+      "fat": 104.20899999999999,
+      "carbs": 210.03599999999997
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json"
+  },
+  {
+    "id": 15,
+    "file": "15_15_teriyaki_beef.html",
+    "title": "Говядина терияки с лапшой и овощами",
+    "kind": "Ужин",
+    "portions": 4,
+    "version": "1.1",
+    "time_total_minutes": "40–50",
+    "time_active_minutes": 30,
+    "nutrition": {
+      "kcal": 755.62,
+      "protein": 55.950500000000005,
+      "fat": 19.408,
+      "carbs": 88.80525000000002
+    },
+    "nutrition_total": {
+      "kcal": 3022.48,
+      "protein": 223.80200000000002,
+      "fat": 77.632,
+      "carbs": 355.22100000000006
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json"
+  },
+  {
+    "id": 16,
+    "file": "16_16_meatballs.html",
+    "title": "Куриные митболы в сырном соусе с цветной капустой",
+    "kind": "Ужин",
+    "portions": 4,
+    "version": "1.1",
+    "time_total_minutes": "40–50",
+    "time_active_minutes": 25,
+    "nutrition": {
+      "kcal": 680.2775,
+      "protein": 61.81475,
+      "fat": 25.05425,
+      "carbs": 54.941
+    },
+    "nutrition_total": {
+      "kcal": 2721.11,
+      "protein": 247.259,
+      "fat": 100.217,
+      "carbs": 219.764
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json"
+  },
+  {
+    "id": 17,
+    "file": "17_17_shawarma.html",
+    "title": "Домашняя шаурма с говядиной и чесночным соусом",
+    "kind": "Ужин",
+    "portions": 4,
+    "version": "1.1",
+    "time_total_minutes": "35–45",
+    "time_active_minutes": 30,
+    "nutrition": {
+      "kcal": 673.83,
+      "protein": 54.836499999999994,
+      "fat": 24.4145,
+      "carbs": 58.50225
+    },
+    "nutrition_total": {
+      "kcal": 2695.32,
+      "protein": 219.34599999999998,
+      "fat": 97.658,
+      "carbs": 234.009
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json"
+  },
+  {
+    "id": 18,
+    "file": "18_18_kofte.html",
+    "title": "Свиноговяжьи кёфте с запечёнными овощами",
+    "kind": "Ужин",
+    "portions": 4,
+    "version": "1.2",
+    "time_total_minutes": "45–55",
+    "time_active_minutes": 25,
+    "nutrition": {
+      "kcal": 689.3824999999999,
+      "protein": 49.611,
+      "fat": 33.384750000000004,
+      "carbs": 50.23
+    },
+    "nutrition_total": {
+      "kcal": 2757.5299999999997,
+      "protein": 198.444,
+      "fat": 133.53900000000002,
+      "carbs": 200.92
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json"
+  },
+  {
+    "id": 19,
+    "file": "19_19_schnitzel.html",
+    "title": "Хрустящий куриный шницель с картофелем и медово-горчичным соусом",
+    "kind": "Ужин",
+    "portions": 4,
+    "version": "1.1",
+    "time_total_minutes": "45–60",
+    "time_active_minutes": 30,
+    "nutrition": {
+      "kcal": 729.6649999999998,
+      "protein": 56.71325,
+      "fat": 23.5005,
+      "carbs": 73.00850000000001
+    },
+    "nutrition_total": {
+      "kcal": 2918.6599999999994,
+      "protein": 226.853,
+      "fat": 94.002,
+      "carbs": 292.03400000000005
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json"
+  },
+  {
+    "id": 20,
+    "file": "20_20_honey_mustard.html",
+    "title": "Курица в медово-горчичной глазури с картофельными дольками",
+    "kind": "Ужин",
+    "portions": 4,
+    "version": "1.1",
+    "time_total_minutes": "45–60",
+    "time_active_minutes": 25,
+    "nutrition": {
+      "kcal": 655.8725,
+      "protein": 56.59575,
+      "fat": 17.737750000000002,
+      "carbs": 69.29124999999999
+    },
+    "nutrition_total": {
+      "kcal": 2623.49,
+      "protein": 226.383,
+      "fat": 70.95100000000001,
+      "carbs": 277.16499999999996
+    },
+    "nutrition_status": "estimate based on declared assumptions in nutrition_basis.json"
+  }
+]
