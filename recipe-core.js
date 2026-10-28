@@ -1,4 +1,4 @@
-/* Edition 1.3.3. Pure quantity model; no storage, DOM, network or secrets.
+/* Edition 1.3.4. Pure quantity model; no storage, DOM, network or secrets.
  * grams remains the nutritional mass. Whole eggs are displayed as pieces.
  * A cooking batch is not silently equated with requested servings.
  */
@@ -18,10 +18,13 @@
   const tspGrams = Object.freeze({oil:4.6,sugar:4,salt:5});
   function spoonText(key, value) {
     const gramsPerTsp = tspGrams[key];
-    if (!gramsPerTsp || value / gramsPerTsp < 1 - 1e-9) return null;
+    if (!gramsPerTsp || value / gramsPerTsp < 0.5 - 1e-9) return null;
     // Quarter-teaspoon is the smallest realistic kitchen measure; avoid fake
     // precision in decimals when converting mass to volume.
-    const quarters = Math.max(4, Math.round(value / gramsPerTsp * 4));
+    const quarters = Math.max(2, Math.round(value / gramsPerTsp * 4));
+    // 1/2 tbsp is easier to measure than 1 1/2 tsp and matches the source
+    // batter recipe (0.5 tbsp salt for five eggs).
+    if (quarters >= 6 && quarters % 6 === 0) return '≈ ' + format(quarters / 12) + ' ст. л.';
     const tbsp = Math.floor(quarters / 12);
     const tspQuarter = quarters % 12;
     const parts = [];
