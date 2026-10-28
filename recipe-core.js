@@ -1,4 +1,4 @@
-/* Edition 1.3. Pure quantity model; no storage, DOM, network or secrets.
+/* Edition 1.3.2. Pure quantity model; no storage, DOM, network or secrets.
  * grams remains the nutritional mass. Whole eggs are displayed as pieces.
  * A cooking batch is not silently equated with requested servings.
  */
@@ -24,9 +24,13 @@
     const step = recipe.batch_step_portions || .5;
     const cookedA = pancake ? requestedA : Math.ceil((requestedA - 1e-9) / step) * step;
     const eggsMass = recipe.egg_model && recipe.egg_model.grams_per_egg || 55;
-    const pancakeA = pancake ? requestedA * 3 : 0;
-    const pancakeC = pancake ? requestedC * 2 : 0;
-    const pancakeBatch = pancake ? Math.ceil((pancakeA + pancakeC - 1e-9) / 6) * 6 : 0;
+    const pancakesPerEgg = pancake ? (recipe.pancakes_per_egg || 4) : 0;
+    const adultPancakesPerPortion = pancake ? (recipe.pancakes_per_adult_portion || 3) : 0;
+    const childPancakesPerPortion = pancake ? (recipe.pancakes_per_child_portion || 2) : 0;
+    const pancakeA = pancake ? requestedA * adultPancakesPerPortion : 0;
+    const pancakeC = pancake ? requestedC * childPancakesPerPortion : 0;
+    const pancakeReference = recipe.portions * adultPancakesPerPortion;
+    const pancakeBatch = pancake ? Math.ceil((pancakeA + pancakeC - 1e-9) / pancakesPerEgg) * pancakesPerEgg : 0;
     const pancakeLeft = pancakeBatch - pancakeA - pancakeC;
     const sideRecipe = who => who === 'a' ? recipe : recipe.child;
     const servings = who => who === 'a' ? cookedA : requestedC;
@@ -38,7 +42,7 @@
       const r = sideRecipe(who), item = r.groups[gi].items[ii];
       if (pancake && gi === 0) {
         // Full shared batter is emitted once, on adult side, never twice.
-        if (mode === 'cook') return who === 'a' ? recipe.groups[0].items[ii].grams * pancakeBatch / 6 : 0;
+        if (mode === 'cook') return who === 'a' ? recipe.groups[0].items[ii].grams * pancakeBatch / pancakeReference : 0;
         return item.grams * requested(who) / r.portions;
       }
       return item.grams * (mode === 'eat' ? requested(who) / r.portions : factor(who));
@@ -108,16 +112,16 @@
       return [...all.values()];
     }
     function batchMessage() {
-      if (pancake) return 'Общий замес: ' + format(pancakeBatch/6) + ' шт. яиц → примерно ' + format(pancakeBatch) +
+      if (pancake) return 'Общий замес: ' + format(pancakeBatch/pancakesPerEgg) + ' шт. яиц → ориентировочно ' + format(pancakeBatch) +
         ' блинов. Для тебя: ' + format(pancakeA) + (enabled ? ', для ребёнка: ' + format(pancakeC) : '') +
-        '. Остаток без начинки: ' + format(pancakeLeft) + ' блинов. Начинка и соусы — только на выбранные порции. Доли отделяем от готовых блинов; сырые яйца не делим.';
+        '. Остаток без начинки: ' + format(pancakeLeft) + ' шт. По твоему фактическому результату — примерно ' + format(pancakesPerEgg) + ' блина из 1 яйца (12 блинов из 3 яиц). Реальный выход зависит от диаметра сковороды и толщины. Начинка и соусы — только на выбранные порции. При отличающемся выходе дели по массе готовых блинов; сырые яйца не делим.';
       if (cookedA > requestedA + 1e-9) return 'Выбрано: ' + format(requestedA) + ' ' + portionWord(requestedA) +
         '. Чтобы использовать целые яйца и сохранить пропорции, готовим ' + format(cookedA) + ' ' + portionWord(cookedA) +
         '. Все ингредиенты и шаги ниже — на эту партию. Остаток: ' + format(cookedA-requestedA) + ' ' + portionWord(cookedA-requestedA) +
         '; отдели его после приготовления и храни по инструкции. Детское количество не увеличивается.';
       return '';
     }
-    return {recipe,basis,enabled,pancake,requestedA,requestedC,cookedA,pancakeA,pancakeC,pancakeBatch,pancakeLeft,
+    return {recipe,basis,enabled,pancake,requestedA,requestedC,cookedA,pancakeA,pancakeC,pancakeBatch,pancakeLeft,pancakesPerEgg,
       eggsMass,sideRecipe,servings,requested,factor,amount,grams,display,expand,nutrition,totals,batchMessage};
   }
   return {create,format,esc,count,portionWord,nutrients};

@@ -1,4 +1,4 @@
-/* Редакция 1.3. Полностью локальное приложение: без fetch, CDN и сервера.
+/* Редакция 1.3.2. Полностью локальное приложение: без fetch, CDN и сервера.
  * Базовые данные неизменны; обе партии пересчитываются независимо от них.
  * Числовые токены в шагах используют те же граммовки, что списки ингредиентов.
  */
@@ -83,7 +83,7 @@
         const amount=grams('t',item.key,0);
         html+=ingredientRow(item.name,plan.display(item,amount),item.unit||'г','s-0-'+ii);
       });
-      html+='</div><div class="card"><h3>Как разделить готовые блины</h3><p>Готовим примерно '+format(plan.pancakeBatch)+' шт. Для тебя: '+format(plan.pancakeA)+' шт.'+(state.enabled?'; ребёнку: '+format(plan.pancakeC)+' шт.':'')+'</p><p>Доля готовой массы: тебе '+expand('{{adultBatterPercent}}')+'%'+(state.enabled?', ребёнку '+expand('{{childBatterPercent}}')+'%':'')+', остаток '+expand('{{leftoverBatterPercent}}')+'%.</p><p>Лишние '+format(plan.pancakeLeft)+' блинов оставь без начинки. Дробную долю отделяй от уже готового блина; сырое яйцо не делим.</p></div></div>';
+      html+='</div><div class="card"><h3>Как разделить готовые блины</h3><p>Готовим примерно '+format(plan.pancakeBatch)+' шт. Для тебя: '+format(plan.pancakeA)+' шт.'+(state.enabled?'; ребёнку: '+format(plan.pancakeC)+' шт.':'')+'</p><p>Доля готовой массы: тебе '+expand('{{adultBatterPercent}}')+'%'+(state.enabled?', ребёнку '+expand('{{childBatterPercent}}')+'%':'')+', остаток '+expand('{{leftoverBatterPercent}}')+'%.</p><p>'+(plan.pancakeLeft>0?'Лишние '+format(plan.pancakeLeft)+' шт. оставь без начинки.':'В этом замесе нет лишних блинов по расчёту.')+' Дробную долю отделяй от уже готового блина; сырое яйцо не делим.</p><p class="hint">Расчёт по твоему замеру: 12 блинов из 3 яиц, то есть около 4 блинов на яйцо. Реальный выход зависит от размера и толщины.</p></div></div>';
     }
     if(state.enabled) html+='<h3 class="role-heading">Моя '+(shared?'начинка и соус':'партия')+' · '+format(plan.cookedA)+' '+word(plan.cookedA)+'</h3>';
     html+='<div class="ingredients" id="adult-ingredients">';
@@ -156,9 +156,15 @@
     stats[0].querySelector('span').textContent=state.enabled?'мои + детские порции':'мои '+word(state.adult);
     stats[1].querySelector('strong').textContent=state.enabled?r.family_time:r.time;
     stats[1].querySelector('.micro').textContent='≈ '+(state.enabled?r.family_active_minutes:r.active_minutes)+' мин активной работы';
+    const perPortion = plan.pancake ? plan.nutrition('a','eat') : r.nutrition.total;
+    const caloriesPerPortion = plan.pancake ? perPortion.kcal/state.adult : r.nutrition.per_portion.kcal;
+    if (plan.pancake) {
+      stats[2].querySelector('strong').textContent='≈ '+format(caloriesPerPortion,0);
+      stats[3].querySelector('strong').textContent='≈ '+format(perPortion.protein/state.adult,1)+' г';
+    }
     stats[2].querySelector('span').textContent='ккал / моя порция';
     stats[3].querySelector('span').textContent='белка / моя порция';
-    document.querySelector('.hero .badge').textContent=(state.enabled?'Мои '+format(state.adult)+' + детские '+format(state.child)+' порции':'Мои '+format(state.adult)+' '+word(state.adult))+' · ≈'+format(r.nutrition.per_portion.kcal,0)+' ккал / моя порция';
+    document.querySelector('.hero .badge').textContent=(state.enabled?'Мои '+format(state.adult)+' + детские '+format(state.child)+' порции':'Мои '+format(state.adult)+' '+word(state.adult))+' · ≈'+format(caloriesPerPortion,0)+' ккал / моя порция';
     elements.workflow.innerHTML='<p><strong>Как организовать готовку.</strong> '+esc(state.enabled?r.family_workflow:r.workflow)+' Время — ориентир для базового количества; при другой площади сковороды и числе партий оно меняется.</p>';
     document.getElementById('ingredient-heading').textContent=state.enabled?'Ингредиенты на оба завтрака':'Ингредиенты';
     document.getElementById('method-heading').textContent=state.enabled?'Как приготовить оба завтрака':'Как приготовить';
