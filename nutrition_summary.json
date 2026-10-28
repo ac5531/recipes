@@ -5,7 +5,7 @@
     "title": "Хрустящая тортилья с курицей, яйцом и сыром",
     "kind": "Завтрак",
     "portions": 2,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "30–35",
     "time_active_minutes": 25,
     "nutrition": {
@@ -26,10 +26,10 @@
       "title": "Конвертик с сочной куриной начинкой без перца",
       "portions": 1,
       "nutrition": {
-        "kcal": 230.75,
-        "protein": 17.958,
-        "fat": 8.711,
-        "carbs": 20.43
+        "kcal": 229,
+        "protein": 17.782999999999998,
+        "fat": 8.641,
+        "carbs": 20.325
       }
     }
   },
@@ -39,7 +39,7 @@
     "title": "Завтрак-бургер со свиноговяжьей котлетой, яйцом и сыром",
     "kind": "Завтрак",
     "portions": 2,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "30–35",
     "time_active_minutes": 25,
     "nutrition": {
@@ -73,7 +73,7 @@
     "title": "Куриные оладьи с кабачком и сыром",
     "kind": "Завтрак",
     "portions": 2,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "25–35",
     "time_active_minutes": 20,
     "nutrition": {
@@ -107,7 +107,7 @@
     "title": "Яблочно-банановая овсяная запеканка с творожным кремом",
     "kind": "Завтрак",
     "portions": 2,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "35–45",
     "time_active_minutes": 12,
     "nutrition": {
@@ -141,7 +141,7 @@
     "title": "Блины на обычном молоке с курицей, грибами и сырным соусом",
     "kind": "Завтрак",
     "portions": 2,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "30–40",
     "time_active_minutes": 30,
     "nutrition": {
@@ -162,10 +162,10 @@
       "title": "Домашние блины с курицей в мягком соусе",
       "portions": 1,
       "nutrition": {
-        "kcal": 291.1166666666667,
-        "protein": 20.956166666666665,
-        "fat": 13.533166666666668,
-        "carbs": 20.736666666666668
+        "kcal": 288.8666666666667,
+        "protein": 20.731166666666667,
+        "fat": 13.443166666666666,
+        "carbs": 20.601666666666667
       }
     }
   },
@@ -175,7 +175,7 @@
     "title": "Картофельный рёшти с яйцом",
     "kind": "Завтрак",
     "portions": 2,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "30–35",
     "time_active_minutes": 25,
     "nutrition": {
@@ -196,10 +196,10 @@
       "title": "Небольшие рёшти с курицей",
       "portions": 1,
       "nutrition": {
-        "kcal": 246.64999999999998,
-        "protein": 17.57,
-        "fat": 8.035,
-        "carbs": 26.244999999999997
+        "kcal": 244.89999999999998,
+        "protein": 17.395,
+        "fat": 7.965,
+        "carbs": 26.139999999999997
       }
     }
   },
@@ -209,7 +209,7 @@
     "title": "Ленивый хачапури с сыром и яйцом",
     "kind": "Завтрак",
     "portions": 2,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "25–35",
     "time_active_minutes": 15,
     "nutrition": {
@@ -243,7 +243,7 @@
     "title": "Безлактозный творог с овсянкой и бананом",
     "kind": "Завтрак",
     "portions": 2,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "15–20",
     "time_active_minutes": 10,
     "nutrition": {
@@ -277,7 +277,7 @@
     "title": "Горячие тосты с курицей, сыром и грибами",
     "kind": "Завтрак",
     "portions": 2,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "25–30",
     "time_active_minutes": 20,
     "nutrition": {
@@ -298,10 +298,10 @@
       "title": "Тёплый тост с нежной куриной намазкой",
       "portions": 1,
       "nutrition": {
-        "kcal": 222.0,
-        "protein": 18.733,
-        "fat": 7.301,
-        "carbs": 19.990000000000002
+        "kcal": 220.5,
+        "protein": 18.583,
+        "fat": 7.241,
+        "carbs": 19.900000000000002
       }
     }
   },
@@ -311,7 +311,7 @@
     "title": "Омлет-рулет с курицей и сыром",
     "kind": "Завтрак",
     "portions": 2,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "35–40",
     "time_active_minutes": 20,
     "nutrition": {
@@ -332,10 +332,10 @@
       "title": "Мягкие картофельно-куриные лепёшки",
       "portions": 1,
       "nutrition": {
-        "kcal": 254.55,
-        "protein": 18.703599999999998,
-        "fat": 6.1612,
-        "carbs": 31.022
+        "kcal": 252.8,
+        "protein": 18.5286,
+        "fat": 6.0912,
+        "carbs": 30.916999999999998
       }
     }
   },
@@ -345,7 +345,7 @@
     "title": "Курица в сливочно-грибном соусе с картофельным пюре",
     "kind": "Ужин",
     "portions": 4,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "40–50",
     "time_active_minutes": 30,
     "nutrition": {
@@ -369,7 +369,7 @@
     "title": "Чизбургер-боул со свиноговяжьим фаршем и хрустящим картофелем",
     "kind": "Ужин",
     "portions": 4,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "40–50",
     "time_active_minutes": 25,
     "nutrition": {
@@ -393,7 +393,7 @@
     "title": "Сливочная паста с курицей, чесноком и пармезаном",
     "kind": "Ужин",
     "portions": 4,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "30–40",
     "time_active_minutes": 25,
     "nutrition": {
@@ -417,7 +417,7 @@
     "title": "Мексиканская кесадилья с курицей и сыром",
     "kind": "Ужин",
     "portions": 4,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "35–45",
     "time_active_minutes": 30,
     "nutrition": {
@@ -441,7 +441,7 @@
     "title": "Говядина терияки с лапшой и овощами",
     "kind": "Ужин",
     "portions": 4,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "40–50",
     "time_active_minutes": 30,
     "nutrition": {
@@ -465,7 +465,7 @@
     "title": "Куриные митболы в сырном соусе с цветной капустой",
     "kind": "Ужин",
     "portions": 4,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "40–50",
     "time_active_minutes": 25,
     "nutrition": {
@@ -489,7 +489,7 @@
     "title": "Домашняя шаурма с говядиной и чесночным соусом",
     "kind": "Ужин",
     "portions": 4,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "35–45",
     "time_active_minutes": 30,
     "nutrition": {
@@ -513,7 +513,7 @@
     "title": "Свиноговяжьи кёфте с запечёнными овощами",
     "kind": "Ужин",
     "portions": 4,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "45–55",
     "time_active_minutes": 25,
     "nutrition": {
@@ -537,7 +537,7 @@
     "title": "Хрустящий куриный шницель с картофелем и медово-горчичным соусом",
     "kind": "Ужин",
     "portions": 4,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "45–60",
     "time_active_minutes": 30,
     "nutrition": {
@@ -561,7 +561,7 @@
     "title": "Курица в медово-горчичной глазури с картофельными дольками",
     "kind": "Ужин",
     "portions": 4,
-    "version": "1.3",
+    "version": "1.3.1",
     "time_total_minutes": "45–60",
     "time_active_minutes": 25,
     "nutrition": {
