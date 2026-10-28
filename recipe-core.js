@@ -1,4 +1,4 @@
-/* Edition 1.3.2. Pure quantity model; no storage, DOM, network or secrets.
+/* Edition 1.3.3. Pure quantity model; no storage, DOM, network or secrets.
  * grams remains the nutritional mass. Whole eggs are displayed as pieces.
  * A cooking batch is not silently equated with requested servings.
  */
@@ -12,6 +12,29 @@
   const format = (n, d = 2) => new Intl.NumberFormat('ru-RU', {useGrouping:false, maximumFractionDigits:d}).format(Math.round((n + Number.EPSILON) * 10**d) / 10**d);
   const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const portionWord = n => ({one:'порция',few:'порции',many:'порций',other:'порции'}[new Intl.PluralRules('ru-RU').select(n)]);
+  // Cooking display only. The original gram amount is ALWAYS preserved for
+  // scaling, purchase totals and nutrition. Spoon quantities are approximate:
+  // 1 tsp = 5 ml ≈ 4.6g vegetable/olive oil, 4g sugar or 5g fine table salt.
+  const tspGrams = Object.freeze({oil:4.6,sugar:4,salt:5});
+  function spoonText(key, value) {
+    const gramsPerTsp = tspGrams[key];
+    if (!gramsPerTsp || value / gramsPerTsp < 1 - 1e-9) return null;
+    // Quarter-teaspoon is the smallest realistic kitchen measure; avoid fake
+    // precision in decimals when converting mass to volume.
+    const quarters = Math.max(4, Math.round(value / gramsPerTsp * 4));
+    const tbsp = Math.floor(quarters / 12);
+    const tspQuarter = quarters % 12;
+    const parts = [];
+    if (tbsp) parts.push(format(tbsp) + ' ст. л.');
+    if (tspQuarter) parts.push(format(tspQuarter / 4) + ' ч. л.');
+    return '≈ ' + parts.join(' + ');
+  }
+  function measuredAmount(item, value) {
+    const useSpoons = item.key === 'sugar' || item.key === 'salt' ||
+      (item.key === 'oil' && item.measure_spoons === true);
+    return useSpoons ? spoonText(item.key, value) : null;
+  }
+
   function count(value, fallback) {
     const n = Number(String(value == null ? '' : value).trim().replace(',', '.'));
     return Number.isFinite(n) && n >= .5 && n <= 1000 ? Math.round(n * 2) / 2 : fallback;
@@ -65,7 +88,7 @@
         if (Math.abs(pieces - Math.round(pieces)) > 1e-6) throw new Error('Не целое яйцо в приготовляемой партии: ' + pieces);
         return format(Math.round(pieces)) + ' шт.';
       }
-      return format(value) + ' ' + (item.unit || 'г');
+      return measuredAmount(item, value) || format(value) + ' ' + (item.unit || 'г');
     }
     function expand(template) {
       const special = {adultPancakes:pancakeA,childPancakes:pancakeC,allPancakes:pancakeA+pancakeC,
@@ -74,15 +97,22 @@
         leftoverBatterPercent:100*pancakeLeft/pancakeBatch};
       return String(template).replace(/\{\{(.*?)\}\}/g, (_, token) => {
         if (Object.prototype.hasOwnProperty.call(special, token)) return format(special[token], 2);
-        const m = token.match(/^([act])\.(?:(\d+)\.)?(\w+)(?:\*([\d.]+))?$/);
+        const m = token.match(/^([act])\.(?:(\d+)\.)?(\w+)(?:\*([\d.]+))?(\|measure)?$/);
         if (!m) throw new Error('Неизвестный токен: ' + token);
-        const [,who,gi,key,mul] = m;
+        const [,who,gi,key,mul,measure] = m;
         let value = key === 'portions' ? (who === 't' ? cookedA+requestedC : servings(who)) : grams(who,key,gi);
         value *= Number(mul || 1);
         if (key === 'egg') {
           value /= eggsMass;
           if (Math.abs(value - Math.round(value)) > 1e-6) throw new Error('Дробное яйцо в шаге: ' + token);
           value = Math.round(value);
+        }
+        if (measure) {
+          if (!Object.prototype.hasOwnProperty.call(tspGrams, key))
+            throw new Error('Нельзя измерить ложками: ' + token);
+          // Only templates for oil poured onto food carry |measure;
+          // pan oil templates keep using numeric grams.
+          return display({key, measure_spoons:true}, value);
         }
         return format(value);
       });
@@ -124,5 +154,5 @@
     return {recipe,basis,enabled,pancake,requestedA,requestedC,cookedA,pancakeA,pancakeC,pancakeBatch,pancakeLeft,pancakesPerEgg,
       eggsMass,sideRecipe,servings,requested,factor,amount,grams,display,expand,nutrition,totals,batchMessage};
   }
-  return {create,format,esc,count,portionWord,nutrients};
+  return {create,format,esc,count,portionWord,nutrients,spoonText};
 });
