@@ -114,3 +114,12 @@
   try {saved = localStorage.getItem(storageKey);} catch (e) { /* Работаем без сохранения. */ }
   apply(saved !== null ? saved : originalCount);
 })();
+
+// Дополнение: заметки в GitHub. Не меняет расчёты рецептов.
+;(() => {
+  if (document.querySelector('script[data-github-notes-loader]')) return;
+  const script = document.createElement('script');
+  script.src = 'github-notes.js';
+  script.setAttribute('data-github-notes-loader', '');
+  document.body.appendChild(script);
+})();
