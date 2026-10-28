@@ -1,8 +1,8 @@
 {
-  "version": "1.2",
-  "date": "2026-10-27",
+  "version": "1.3",
+  "date": "2026-10-28",
   "units": "per 100 g of ingredient as weighed before cooking; kcal, g protein, g fat, g carbohydrates",
-  "method": "Sum grams / 100 * declared per-100-g values, then divide by portions. All listed oil, sauces and coating included. Calories and macros are separately declared; differences from 4/9/4 are possible due to rounding/fibre/factors. Most inputs are approximate editorial assumptions, NOT verified labels of user products. Edition 1.2 adds independent child portions. Adult and child totals are calculated separately; no average family portion. Milk volume in ml uses an approximate 1 ml = 1 g conversion for nutrition only. Oil density is assumed 0.92 g/ml. Pork-beef mince is explicitly modelled at 200 kcal/100 g, not a claim about any brand.",
+  "method": "Sum grams / 100 * declared per-100-g values, then divide by portions. All listed oil, sauces and coating included. Calories and macros are separately declared; differences from 4/9/4 are possible due to rounding/fibre/factors. Most inputs are approximate editorial assumptions, NOT verified labels of user products. Edition 1.2 adds independent child portions. Adult and child totals are calculated separately; no average family portion. Milk volume in ml uses an approximate 1 ml = 1 g conversion for nutrition only. Oil density is assumed 0.92 g/ml. Pork-beef mince is explicitly modelled at 200 kcal/100 g, not a claim about any brand. Edition 1.3: one whole egg is modelled as 55 g edible content (editorial assumption, not a size standard). Quantities with eggs use complete cooking batches; selected portions and leftovers are distinct. Pancake batter is rounded to whole eggs with all batter ingredients scaled together; fillings are scaled only to requested portions. Nutrition for selected pancakes excludes leftover unfilled pancakes, shown separately. Child savoury sauces are included.",
   "ingredients": [
     {
       "key": "iceberg",
@@ -891,6 +891,18 @@
       },
       "provenance": "Приближённое допущение редакции 1.2; не этикетка конкретной покупки",
       "source_url": null
+    },
+    {
+      "key": "broth",
+      "example_label": "Домашний куриный бульон без добавленной соли",
+      "per_100g": {
+        "kcal": 5,
+        "protein": 0.5,
+        "fat": 0.2,
+        "carbs": 0.3
+      },
+      "provenance": "Приближённое редакционное допущение для лёгкого процеженного бульона; фактический состав зависит от приготовления. Не анализ конкретного продукта.",
+      "source_url": null
     }
   ],
   "sources": [
@@ -938,5 +950,9 @@
       "title": "NHS — Milk ladder: individual clinician-led reintroduction",
       "url": "https://www.blmkhealthiertogether.nhs.uk/professionals/gp-primary-care-staff/protein-allergy-information/milk-ladder-has-my-baby-grown-out-cows-milk-protein-allergy"
     }
-  ]
+  ],
+  "egg_assumption": {
+    "grams_per_whole_egg": 55,
+    "note": "Условная съедобная масса для КБЖУ; размер яйца не стандартизирован. В быту яйца считаются поштучно, взвешивать их не нужно."
+  }
 }

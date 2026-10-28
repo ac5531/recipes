@@ -1,0 +1,124 @@
+/* Edition 1.3. Pure quantity model; no storage, DOM, network or secrets.
+ * grams remains the nutritional mass. Whole eggs are displayed as pieces.
+ * A cooking batch is not silently equated with requested servings.
+ */
+(function (root, factory) {
+  const api = factory();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  else root.RecipeCore = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const nutrients = ['kcal', 'protein', 'fat', 'carbs'];
+  const format = (n, d = 2) => new Intl.NumberFormat('ru-RU', {useGrouping:false, maximumFractionDigits:d}).format(Math.round((n + Number.EPSILON) * 10**d) / 10**d);
+  const esc = v => String(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const portionWord = n => ({one:'порция',few:'порции',many:'порций',other:'порции'}[new Intl.PluralRules('ru-RU').select(n)]);
+  function count(value, fallback) {
+    const n = Number(String(value == null ? '' : value).trim().replace(',', '.'));
+    return Number.isFinite(n) && n >= .5 && n <= 1000 ? Math.round(n * 2) / 2 : fallback;
+  }
+  function create(recipe, basis, state) {
+    const enabled = Boolean(recipe.child && state.enabled);
+    const requestedA = count(state.adult, recipe.portions);
+    const requestedC = enabled ? count(state.child, 1) : 0;
+    const pancake = recipe.batch_mode === 'shared_pancakes';
+    const step = recipe.batch_step_portions || .5;
+    const cookedA = pancake ? requestedA : Math.ceil((requestedA - 1e-9) / step) * step;
+    const eggsMass = recipe.egg_model && recipe.egg_model.grams_per_egg || 55;
+    const pancakeA = pancake ? requestedA * 3 : 0;
+    const pancakeC = pancake ? requestedC * 2 : 0;
+    const pancakeBatch = pancake ? Math.ceil((pancakeA + pancakeC - 1e-9) / 6) * 6 : 0;
+    const pancakeLeft = pancakeBatch - pancakeA - pancakeC;
+    const sideRecipe = who => who === 'a' ? recipe : recipe.child;
+    const servings = who => who === 'a' ? cookedA : requestedC;
+    const requested = who => who === 'a' ? requestedA : requestedC;
+    const factor = who => servings(who) / sideRecipe(who).portions;
+    // 'eat' includes only chosen servings. 'cook' includes full batches.
+    function amount(who, gi, ii, mode = 'cook') {
+      if (who === 'c' && !enabled) return 0;
+      const r = sideRecipe(who), item = r.groups[gi].items[ii];
+      if (pancake && gi === 0) {
+        // Full shared batter is emitted once, on adult side, never twice.
+        if (mode === 'cook') return who === 'a' ? recipe.groups[0].items[ii].grams * pancakeBatch / 6 : 0;
+        return item.grams * requested(who) / r.portions;
+      }
+      return item.grams * (mode === 'eat' ? requested(who) / r.portions : factor(who));
+    }
+    function grams(who, key, group) {
+      let sum = 0, found = false;
+      ['a', 'c'].forEach(side => {
+        if (who !== 't' && who !== side || side === 'c' && !enabled) return;
+        sideRecipe(side).groups.forEach((g, gi) => {
+          if (group !== undefined && Number(group) !== gi) return;
+          g.items.forEach((item, ii) => {if (item.key === key) {found = true; sum += amount(side, gi, ii);}});
+        });
+      });
+      if (!found) throw new Error('Ингредиент шага отсутствует: ' + who + '.' + (group === undefined ? '' : group + '.') + key);
+      return sum;
+    }
+    function display(item, value) {
+      if (item.key === 'egg') {
+        const pieces = value / eggsMass;
+        if (Math.abs(pieces - Math.round(pieces)) > 1e-6) throw new Error('Не целое яйцо в приготовляемой партии: ' + pieces);
+        return format(Math.round(pieces)) + ' шт.';
+      }
+      return format(value) + ' ' + (item.unit || 'г');
+    }
+    function expand(template) {
+      const special = {adultPancakes:pancakeA,childPancakes:pancakeC,allPancakes:pancakeA+pancakeC,
+        batchPancakes:pancakeBatch,leftoverPancakes:pancakeLeft,
+        adultBatterPercent:100*pancakeA/pancakeBatch,childBatterPercent:100*pancakeC/pancakeBatch,
+        leftoverBatterPercent:100*pancakeLeft/pancakeBatch};
+      return String(template).replace(/\{\{(.*?)\}\}/g, (_, token) => {
+        if (Object.prototype.hasOwnProperty.call(special, token)) return format(special[token], 2);
+        const m = token.match(/^([act])\.(?:(\d+)\.)?(\w+)(?:\*([\d.]+))?$/);
+        if (!m) throw new Error('Неизвестный токен: ' + token);
+        const [,who,gi,key,mul] = m;
+        let value = key === 'portions' ? (who === 't' ? cookedA+requestedC : servings(who)) : grams(who,key,gi);
+        value *= Number(mul || 1);
+        if (key === 'egg') {
+          value /= eggsMass;
+          if (Math.abs(value - Math.round(value)) > 1e-6) throw new Error('Дробное яйцо в шаге: ' + token);
+          value = Math.round(value);
+        }
+        return format(value);
+      });
+    }
+    function nutrition(who, mode = 'cook') {
+      const total = {kcal:0,protein:0,fat:0,carbs:0};
+      if (who === 'c' && !enabled) return total;
+      sideRecipe(who).groups.forEach((g,gi) => g.items.forEach((i,ii) => {
+        if (!basis[i.key]) throw new Error('Нет расчётной базы: ' + i.key);
+        const grams = amount(who,gi,ii,mode);
+        nutrients.forEach(k => total[k] += grams / 100 * basis[i.key][k]);
+      }));
+      return total;
+    }
+    function totals() {
+      const all = new Map();
+      ['a','c'].forEach(side => {
+        if (side==='c'&&!enabled) return;
+        sideRecipe(side).groups.forEach((g,gi)=>g.items.forEach((item,ii)=>{
+          const n = amount(side,gi,ii);
+          if (n === 0) return;
+          const key = item.key + '|' + (item.unit||'г');
+          if (!all.has(key)) all.set(key,{...item,grams:0});
+          all.get(key).grams += n;
+        }));
+      });
+      return [...all.values()];
+    }
+    function batchMessage() {
+      if (pancake) return 'Общий замес: ' + format(pancakeBatch/6) + ' шт. яиц → примерно ' + format(pancakeBatch) +
+        ' блинов. Для тебя: ' + format(pancakeA) + (enabled ? ', для ребёнка: ' + format(pancakeC) : '') +
+        '. Остаток без начинки: ' + format(pancakeLeft) + ' блинов. Начинка и соусы — только на выбранные порции. Доли отделяем от готовых блинов; сырые яйца не делим.';
+      if (cookedA > requestedA + 1e-9) return 'Выбрано: ' + format(requestedA) + ' ' + portionWord(requestedA) +
+        '. Чтобы использовать целые яйца и сохранить пропорции, готовим ' + format(cookedA) + ' ' + portionWord(cookedA) +
+        '. Все ингредиенты и шаги ниже — на эту партию. Остаток: ' + format(cookedA-requestedA) + ' ' + portionWord(cookedA-requestedA) +
+        '; отдели его после приготовления и храни по инструкции. Детское количество не увеличивается.';
+      return '';
+    }
+    return {recipe,basis,enabled,pancake,requestedA,requestedC,cookedA,pancakeA,pancakeC,pancakeBatch,pancakeLeft,
+      eggsMass,sideRecipe,servings,requested,factor,amount,grams,display,expand,nutrition,totals,batchMessage};
+  }
+  return {create,format,esc,count,portionWord,nutrients};
+});

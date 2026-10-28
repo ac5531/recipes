@@ -1,125 +1,63 @@
-/* Единственное дополнение к коллекции: пересчёт ингредиентов и КБЖУ по числу порций с шагом 0,5. */
+/* Edition 1.3. Dinner quantities, step templates and nutrition share one model. */
 (function () {
   'use strict';
-
-  const statsNumber = document.querySelector('.stats .stat:first-child strong');
-  const statsLabel = document.querySelector('.stats .stat:first-child span');
-  const ingredients = document.querySelector('.ingredients');
-  if (!statsNumber || !ingredients) return;
-
-  const originalCount = Number(statsNumber.textContent.trim().replace(',', '.'));
-  if (!(originalCount > 0)) return;
-
-  const ruNumber = new Intl.NumberFormat('ru-RU', {
-    useGrouping: false, maximumFractionDigits: 4
-  });
-  const format = value => ruNumber.format(Math.round((value + Number.EPSILON) * 10000) / 10000);
-  const parse = text => Number(String(text).replace(',', '.'));
-  const originalLabel = statsLabel ? statsLabel.textContent : '';
-
-  // Запоминаем исходные значения: каждое новое количество пересчитывается от оригинала.
-  const ingredientAmounts = [...document.querySelectorAll('.ingredients .amount')]
-    .map(el => ({el, original: el.textContent}));
-  const portionsInNames = [
-    ...document.querySelectorAll('.ingredients .check label span'),
-    ...document.querySelectorAll('table.nutrition td.ingname')
-  ].map(el => ({el, node: el.firstChild, original: el.firstChild ? el.firstChild.textContent : ''}))
-    .filter(item => /\d+(?:[.,]\d+)?\s*×\s*\d+(?:[.,]\d+)?\s*г/.test(item.original));
-
-  const tables = document.querySelectorAll('table.nutrition');
-  const overallValues = tables[0] ? [...tables[0].querySelectorAll('tbody tr')].map(row => {
-    const cells = row.querySelectorAll('td');
-    return cells.length >= 3 ? {el: cells[2], original: cells[2].textContent, isCalories: /калор/i.test(cells[0].textContent)} : null;
-  }).filter(Boolean) : [];
-  const detailedValues = tables[1] ? [...tables[1].querySelectorAll('tbody tr')].flatMap(row =>
-    [...row.querySelectorAll('td')].slice(1).map(el => ({el, original: el.textContent}))
-  ) : [];
-
-  const scaleText = (source, multiplier, decimals) => {
-    if (multiplier === 1) return source;
-    return source.replace(/^(\s*≈?\s*)(\d+(?:[.,]\d+)?)(.*)$/s, (_, prefix, number, suffix) => {
-      const result = parse(number) * multiplier;
-      const displayed = decimals === undefined ? format(result) :
-        new Intl.NumberFormat('ru-RU', {useGrouping: false, maximumFractionDigits: decimals}).format(result);
-      return prefix + displayed + suffix;
+  const source = document.getElementById('recipe-family-data');
+  if (!source || !window.RecipeCore) return;
+  const {recipe:r,basis} = JSON.parse(source.textContent);
+  if (r.child) return;
+  const core=window.RecipeCore, f=core.format, esc=core.esc;
+  const prefix='recipes_v1_1_'+r.id+'_';
+  const get=k=>{try{return localStorage.getItem(k);}catch(_){return null;}};
+  const set=(k,v)=>{try{localStorage.setItem(k,String(v));}catch(_){/* Browsing still works. */}};
+  let current=core.count(get(prefix+'portion_count'),r.portions),plan;
+  const list=document.querySelector('.ingredients');
+  const controls=document.createElement('div');controls.className='family-portions no-print';
+  controls.innerHTML='<div class="portion-control"><label for="rp-portion-input">Нужно порций</label><div class="portion-row"><button type="button" data-delta="-0.5" aria-label="Уменьшить на 0,5">−</button><input id="rp-portion-input" type="number" min="0.5" max="1000" step="0.5" inputmode="decimal"><button type="button" data-delta="0.5" aria-label="Увеличить на 0,5">+</button></div></div><span class="portion-hint">Шаг 0,5</span>';
+  list.before(controls);
+  const batch=document.createElement('div');batch.id='batch-plan';batch.className='note batch-plan';list.before(batch);
+  const input=controls.querySelector('input');
+  const nameFor=(item,scale)=>item.name.replace(/(\d+(?:[.,]\d+)?)(\s*×\s*\d+(?:[.,]\d+)?\s*г)/g,(_,n,t)=>f(Number(n.replace(',','.'))*scale)+t);
+  function render(){
+    plan=core.create(r,basis,{adult:current});input.value=String(current);
+    controls.querySelector('[data-delta="-0.5"]').disabled=current<=.5;
+    controls.querySelector('[data-delta="0.5"]').disabled=current>=1000;
+    batch.textContent=plan.batchMessage().replace(' Детское количество не увеличивается.','');batch.hidden=!batch.textContent;
+    const stats=document.querySelectorAll('.stats .stat');
+    stats[0].querySelector('strong').textContent=f(plan.cookedA);
+    stats[0].querySelector('span').textContent='готовим '+core.portionWord(plan.cookedA);
+    let idx=0;
+    list.innerHTML=r.groups.map((g,gi)=>'<div class="card"><h3>'+esc(g.name)+'</h3>'+g.items.map((item,ii)=>{
+      const key=prefix+'ingredient_'+idx++;
+      return '<div class="check"><label><input type="checkbox" data-storage-key="'+key+'"'+(get(key)==='1'?' checked':'')+'><span>'+esc(nameFor(item,plan.factor('a')))+'</span></label><span class="amount">'+esc(plan.display(item,plan.amount('a',gi,ii)))+'</span></div>';
+    }).join('')+'</div>').join('');
+    document.getElementById('recipe-steps').innerHTML=r.step_templates.map(([title,text])=>'<li><strong>'+esc(title)+'</strong>'+esc(plan.expand(text))+'</li>').join('');
+    const total=plan.nutrition('a'),eat=plan.nutrition('a','eat');
+    const nutrition=document.getElementById('nutrition-section');
+    const open=Boolean(nutrition.querySelector('details[open]'));
+    let html='<h2>КБЖУ</h2><div class="tablewrap"><table class="nutrition"><thead><tr><th>Показатель</th><th>На 1 порцию</th><th>Готовим '+f(plan.cookedA)+' '+core.portionWord(plan.cookedA)+'</th><th>Выбрано '+f(current)+'</th></tr></thead><tbody>';
+    [['kcal','Калории','ккал'],['protein','Белки','г'],['fat','Жиры','г'],['carbs','Углеводы','г']].forEach(([key,label,unit])=>{
+      const d=key==='kcal'?0:1;
+      html+='<tr><td>'+label+'</td><td>≈ '+f(total[key]/plan.cookedA,d)+' '+unit+'</td><td>≈ '+f(total[key],d)+' '+unit+'</td><td>≈ '+f(eat[key],d)+' '+unit+'</td></tr>';
     });
-  };
-
-  const style = document.createElement('style');
-  style.textContent = `
-    .rp-portions{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:15px 0 19px}
-    .rp-portions label{font-weight:700;color:var(--green)}
-    .rp-portions button{min-width:36px;height:36px;padding:0 8px;border:1px solid var(--line);border-radius:9px;background:var(--lime);color:var(--green);font-size:21px;font-weight:700;cursor:pointer}
-    .rp-portions button:hover{background:#e0ead8}
-    .rp-portions button:disabled{opacity:.45;cursor:default}
-    .rp-portions input{width:77px;height:36px;border:1px solid #cbd5c5;border-radius:9px;background:#fff;color:var(--ink);font:600 16px system-ui,sans-serif;text-align:center;padding:4px}
-    .rp-portions .rp-hint{font-size:13px;color:var(--muted)}
-    @media print{.rp-portions{display:none!important}}
-  `;
-  document.head.appendChild(style);
-
-  const controls = document.createElement('div');
-  controls.className = 'rp-portions no-print';
-  controls.innerHTML = '<label for="rp-portion-input">Количество порций:</label>' +
-    '<button type="button" class="rp-minus" aria-label="Уменьшить количество порций на половину">−</button>' +
-    '<input id="rp-portion-input" type="number" min="0.5" step="0.5" inputmode="decimal" aria-label="Количество порций">' +
-    '<button type="button" class="rp-plus" aria-label="Увеличить количество порций на половину">+</button>' +
-    '<span class="rp-hint">Шаг 0,5</span>';
-  ingredients.parentNode.insertBefore(controls, ingredients);
-
-  const input = controls.querySelector('input');
-  const minus = controls.querySelector('.rp-minus');
-  const plus = controls.querySelector('.rp-plus');
-  const root = document.body.dataset.recipe || location.pathname;
-  const storageKey = 'recipes_v1_1_' + root + '_portion_count';
-  let current = originalCount;
-
-  function apply(value) {
-    let count = parse(value);
-    if (!Number.isFinite(count) || count < 0.5) count = current;
-    count = Math.max(0.5, Math.round(count * 2) / 2);
-    const factor = count / originalCount;
-    current = count;
-    input.value = String(count);
-    minus.disabled = count <= 0.5;
-
-    statsNumber.textContent = format(count);
-    if (statsLabel) {
-      const word = Number.isInteger(count)
-        ? ({one: 'порция', few: 'порции', many: 'порций', other: 'порции'}[new Intl.PluralRules('ru-RU').select(count)])
-        : 'порции';
-      statsLabel.textContent = count === originalCount ? originalLabel : word;
-    }
-
-    for (const {el, original} of ingredientAmounts) el.textContent = scaleText(original, factor);
-    for (const {node, original} of portionsInNames) {
-      node.textContent = factor === 1 ? original : original.replace(
-        /(\d+(?:[.,]\d+)?)(\s*×\s*\d+(?:[.,]\d+)?\s*г)/,
-        (_, pieces, rest) => format(parse(pieces) * factor) + rest
-      );
-    }
-    for (const {el, original, isCalories} of overallValues)
-      el.textContent = scaleText(original, factor, isCalories ? 0 : 1);
-    for (const {el, original} of detailedValues)
-      el.textContent = scaleText(original, factor, 2);
-    try {localStorage.setItem(storageKey, String(count));} catch (e) { /* Недоступное хранилище не блокирует управление. */ }
+    html+='</tbody></table></div><p class="hint">Приближённая модель. Все соусы, масло и панировка из списка учтены. Остаток приготовленной партии — не дополнительная еда в выбранных порциях.</p>';
+    if(plan.cookedA>current)html+='<p class="note">Остаток: '+f(plan.cookedA-current)+' '+core.portionWord(plan.cookedA-current)+', ≈'+f(total.kcal-eat.kcal,0)+' ккал.</p>';
+    if(r.nutrition_note)html+='<p class="note">'+esc(r.nutrition_note)+'</p>';
+    html+='<details class="details"'+(open?' open':'')+'><summary>Расчёт по каждому ингредиенту</summary><div class="tablewrap"><table class="nutrition"><thead><tr><th>Ингредиент</th><th>Количество</th><th>ккал</th><th>Б, г</th><th>Ж, г</th><th>У, г</th></tr></thead><tbody>';
+    r.groups.forEach((g,gi)=>g.items.forEach((item,ii)=>{
+      const amount=plan.amount('a',gi,ii);
+      html+='<tr><td class="ingname">'+esc(nameFor(item,plan.factor('a')))+'<small>'+esc(g.name)+'</small></td><td>'+esc(plan.display(item,amount))+'</td>'+core.nutrients.map(k=>'<td>'+f(amount/100*basis[item.key][k],1)+'</td>').join('')+'</tr>';
+    }));
+    html+='</tbody></table></div><p><a href="nutrition_basis.html">Расчётная база →</a></p></details>';
+    nutrition.innerHTML=html;set(prefix+'portion_count',current);
   }
-
-  minus.addEventListener('click', () => apply(current - 0.5));
-  plus.addEventListener('click', () => apply(current + 0.5));
-  input.addEventListener('change', () => apply(input.value));
-  input.addEventListener('keydown', e => {if (e.key === 'Enter') input.blur();});
-
-  let saved = null;
-  try {saved = localStorage.getItem(storageKey);} catch (e) { /* Работаем без сохранения. */ }
-  apply(saved !== null ? saved : originalCount);
-})();
-
-// Дополнение: заметки в GitHub. Не меняет расчёты рецептов.
-;(() => {
-  if (document.querySelector('script[data-github-notes-loader]')) return;
-  const script = document.createElement('script');
-  script.src = 'github-notes.js';
-  script.setAttribute('data-github-notes-loader', '');
-  document.body.appendChild(script);
+  function apply(v){current=core.count(v,current);render();}
+  controls.querySelectorAll('button[data-delta]').forEach(b=>b.addEventListener('click',()=>apply(current+Number(b.dataset.delta))));
+  input.addEventListener('change',()=>apply(input.value));input.addEventListener('keydown',e=>{if(e.key==='Enter')input.blur();});
+  list.addEventListener('change',e=>{if(e.target.matches('input[data-storage-key]'))set(e.target.dataset.storageKey,e.target.checked?'1':'0');});
+  const reset=document.querySelector('[data-reset]');if(reset)reset.addEventListener('click',()=>list.querySelectorAll('input').forEach(b=>{b.checked=false;set(b.dataset.storageKey,'0');}));
+  const note=document.querySelector('.note-area'),status=document.querySelector('.notes-status');
+  if(note){note.value=get(prefix+'notes')||'';note.addEventListener('input',()=>set(prefix+'notes',note.value));}
+  if(status)status.textContent='Локальный черновик. На сайте Google Apps Script сохраняй заметку кнопкой в Google Drive.';
+  const print=document.querySelector('[data-print]');if(print)print.addEventListener('click',()=>window.print());
+  render();window.recipeQuantityPlan=()=>plan;
 })();
